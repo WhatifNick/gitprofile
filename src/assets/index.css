@@ -203,7 +203,16 @@ button:focus-visible,
 .skill-panel {
   display: grid;
   grid-template-rows: 1fr;
+}
+
+/* Only animate when a tap opens it, not when it's re-placed on rotate */
+.skill-panel-intro {
   animation: skill-panel-open 0.25s ease-out;
+}
+
+.skill-panel-closing {
+  animation: skill-panel-close 0.2s ease-in forwards;
+  pointer-events: none;
 }
 
 .skill-panel-body {
@@ -211,14 +220,31 @@ button:focus-visible,
   overflow: hidden;
 }
 
+/* The negative margin cancels the row gap above the panel, so nothing
+   snaps when it's added or removed (--chip-gap is set by the chip list). */
 @keyframes skill-panel-open {
   from {
     grid-template-rows: 0fr;
     opacity: 0;
+    margin-bottom: calc(var(--chip-gap, 0px) * -1);
   }
   to {
     grid-template-rows: 1fr;
     opacity: 1;
+    margin-bottom: 0;
+  }
+}
+
+@keyframes skill-panel-close {
+  from {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-bottom: 0;
+  }
+  to {
+    grid-template-rows: 0fr;
+    opacity: 0;
+    margin-bottom: calc(var(--chip-gap, 0px) * -1);
   }
 }
 
@@ -243,7 +269,8 @@ button:focus-visible,
 
 @media (prefers-reduced-motion: reduce) {
   .skill-popover,
-  .skill-panel {
+  .skill-panel-intro,
+  .skill-panel-closing {
     animation: none;
   }
 }

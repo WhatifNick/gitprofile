@@ -130,16 +130,34 @@ const SkillPanel = ({
   id,
   skill,
   arrow,
+  intro,
+  takeScroll,
   onClose,
+  closing = false,
+  onClosed,
 }: {
   id: string;
   skill: Skill;
   arrow: number;
+  /**
+   * Play the open animation. False when the panel is only being re-placed
+   * after the rows reflowed (e.g. phone rotated).
+   */
+  intro: boolean;
+  /**
+   * Returns true once per tap-to-open, so the panel scrolls into view when
+   * opened but never pulls the page back to it afterwards.
+   */
+  takeScroll: () => boolean;
   onClose: () => void;
+  /** Play the collapse animation, then call onClosed so it can unmount. */
+  closing?: boolean;
+  onClosed?: () => void;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!takeScroll()) return;
     const reduce = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
@@ -147,15 +165,22 @@ const SkillPanel = ({
       block: 'nearest',
       behavior: reduce ? 'auto' : 'smooth',
     });
-  }, [skill]);
+  }, [skill, takeScroll]);
 
   return (
     <div
       ref={ref}
-      id={id}
-      role="region"
-      aria-label={`${skill.title} details`}
-      className="skill-panel relative basis-full"
+      id={closing ? undefined : id}
+      role={closing ? undefined : 'region'}
+      aria-label={closing ? undefined : `${skill.title} details`}
+      aria-hidden={closing || undefined}
+      inert={closing || undefined}
+      className={`skill-panel relative basis-full ${
+        closing ? 'skill-panel-closing' : intro ? 'skill-panel-intro' : ''
+      }`}
+      onAnimationEnd={(e) => {
+        if (closing && e.target === e.currentTarget) onClosed?.();
+      }}
     >
       <div className="skill-panel-body">
         <div className="rounded-2xl bg-base-200 p-4 shadow-inner">
@@ -352,15 +377,52 @@ const SkillChipList = ({
   }, [openIndex, measureTick, items.length]);
 
   // Switching chips: re-measure from scratch.
+  const [reflowed, setReflowed] = useState(false);
+
+  // The panel that was last on screen, so it can animate shut after the
+  // open skill changes or closes.
+  type PanelSnapshot = { skill: Skill; after: number; arrow: number };
+  const shownPanel = useRef<PanelSnapshot | null>(null);
+  const [closingPanel, setClosingPanel] = useState<PanelSnapshot | null>(null);
+  const clearClosing = useCallback(() => setClosingPanel(null), []);
+  const scrollPending = useRef(false);
+  const takeScroll = useCallback(() => {
+    const pending = scrollPending.current;
+    scrollPending.current = false;
+    return pending;
+  }, []);
+
   useLayoutEffect(() => {
+    const previous = shownPanel.current;
+    shownPanel.current = null;
+    const reduce = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    setClosingPanel(previous && !reduce ? previous : null);
     setLayout(null);
     setMeasureTick((t) => t + 1);
+    setReflowed(false);
+    scrollPending.current = openIndex >= 0;
   }, [openIndex]);
 
-  // Rows reflow on rotate/resize: drop the panel and measure again.
+  // Fallback in case animationend never fires (e.g. tab in the background).
+  useEffect(() => {
+    if (!closingPanel) return;
+    const timer = window.setTimeout(clearClosing, 400);
+    return () => window.clearTimeout(timer);
+  }, [closingPanel, clearClosing]);
+
+  // Rows only reflow when the width changes (e.g. rotating the phone).
+  // Mobile browsers also fire 'resize' when the address bar shows or hides
+  // while scrolling; those height-only changes are ignored so the panel
+  // doesn't close, reopen and pull the page back to it.
   useEffect(() => {
     if (openIndex < 0) return;
+    let lastWidth = window.innerWidth;
     const remeasure = () => {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
+      setReflowed(true);
       setLayout(null);
       setMeasureTick((t) => t + 1);
     };
@@ -371,9 +433,30 @@ const SkillChipList = ({
   const panelId = `skill-panel-${listId.replace(/[^a-zA-Z0-9-]/g, '')}`;
   const openSkill = openIndex >= 0 ? items[openIndex]?.skill : undefined;
 
+  useEffect(() => {
+    if (openSkill && layout) {
+      shownPanel.current = {
+        skill: openSkill,
+        after: layout.after,
+        arrow: layout.arrow,
+      };
+    }
+  }, [openSkill, layout]);
+
+  const closePanel = () => {
+    // Hand focus back to the chip so keyboard/screen reader users keep
+    // their place when the Close button disappears.
+    chipRefs.current[openIndex]?.focus({ preventScroll: true });
+    setOpenPanel(null);
+  };
+  const noScroll = useCallback(() => false, []);
+
   return (
     <div
       ref={containerRef}
+      style={
+        { '--chip-gap': rich ? '0.625rem' : '0.5rem' } as React.CSSProperties
+      }
       className={`flex flex-wrap justify-start ${rich ? 'gap-2.5' : 'gap-2'} ${
         rich ? (revealed ? 'skill-reveal-done' : 'skill-reveal-pending') : ''
       } ${className}`}
@@ -446,12 +529,30 @@ const SkillChipList = ({
         return (
           <Fragment key={`${item.label}-${index}`}>
             {chip}
+            {!canHover &&
+              closingPanel &&
+              closingPanel.after === index &&
+              !(openSkill && layout && layout.after === index) && (
+                <SkillPanel
+                  key={`closing-${closingPanel.skill.title}`}
+                  id={panelId}
+                  skill={closingPanel.skill}
+                  arrow={closingPanel.arrow}
+                  intro={false}
+                  takeScroll={noScroll}
+                  onClose={clearClosing}
+                  closing
+                  onClosed={clearClosing}
+                />
+              )}
             {!canHover && openSkill && layout && layout.after === index && (
               <SkillPanel
                 id={panelId}
                 skill={openSkill}
                 arrow={layout.arrow}
-                onClose={() => setOpenPanel(null)}
+                intro={!reflowed}
+                takeScroll={takeScroll}
+                onClose={closePanel}
               />
             )}
           </Fragment>
