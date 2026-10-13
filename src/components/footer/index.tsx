@@ -2,6 +2,42 @@ import { useEffect, useState, useRef } from 'react';
 import styles from './Footer.module.css';
 import catPaw from '../../assets/cat-paw.svg'; // Adjust the path as necessary
 
+// iOS Safari draws page content behind its floating bottom toolbar, so the
+// visible area is taller than window.innerHeight. Without this extra distance
+// the cat's ears stay visible under the toolbar after the scroll-back.
+const IOS_TOOLBAR_FALLBACK = 80;
+
+// Only Safari on iOS draws content behind its toolbar. Chrome, Brave, Firefox
+// etc. on iOS also pass the -webkit-touch-callout check (they all use WebKit),
+// so exclude them: most add a token to the user agent, and Brave (which copies
+// Safari's user agent) exposes navigator.brave instead.
+const isIosSafari = () => {
+  if (
+    typeof CSS === 'undefined' ||
+    !CSS.supports('-webkit-touch-callout', 'none')
+  )
+    return false;
+  if ('brave' in navigator) return false;
+  return !/CriOS|FxiOS|EdgiOS|OPiOS|OPT\/|DuckDuckGo|YaBrowser|GSA\//.test(
+    navigator.userAgent,
+  );
+};
+
+const getIosToolbarOverlap = () => {
+  if (!isIosSafari()) return 0;
+
+  // 100lvh is the viewport height with the toolbars fully retracted, i.e. the
+  // whole area the page can be drawn into.
+  const probe = document.createElement('div');
+  probe.style.cssText =
+    'position:fixed;top:0;left:0;width:0;height:100lvh;visibility:hidden;pointer-events:none;';
+  document.body.appendChild(probe);
+  const largeViewport = probe.getBoundingClientRect().height;
+  probe.remove();
+
+  return Math.max(largeViewport - window.innerHeight, IOS_TOOLBAR_FALLBACK);
+};
+
 const Footer = () => {
   const footerRef = useRef<HTMLDivElement | null>(null);
   const [animate, setAnimate] = useState(false);
@@ -32,7 +68,8 @@ const Footer = () => {
         if (footerRef.current) {
           const scrollDistance =
             footerRef.current.scrollHeight -
-            (document.body.scrollHeight - window.innerHeight - window.scrollY);
+            (document.body.scrollHeight - window.innerHeight - window.scrollY) +
+            getIosToolbarOverlap();
 
           if (scrollDistance > 0) {
             setCounter((prev) => {

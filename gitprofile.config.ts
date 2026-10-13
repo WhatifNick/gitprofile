@@ -385,6 +385,13 @@ const CONFIG = {
           'Used on almost every app I have built since 2019, including theming, custom components and contributing to a company Storybook library.',
       },
       {
+        title: 'Storybook',
+        url: 'https://storybook.js.org/',
+        level: 'proficient',
+        description:
+          "Used for developing and testing UI components in isolation. I've built and maintained many component libraries using Storybook.",
+      },
+      {
         title: 'Semantic UI',
         url: 'https://semantic-ui.com/',
         level: 'proficient',
@@ -411,6 +418,7 @@ const CONFIG = {
         level: 'proficient',
         description:
           'Locally scoped component styles, used heavily in the Studio 71 search filters overhaul.',
+        hideOnPDF: true,
       },
       {
         title: 'BEM Methodology',
