@@ -37,7 +37,7 @@ const SkillLevelMeter = ({
         {Array.from({ length: MAX_SKILL_RANK }, (_, i) => (
           <span
             key={i}
-            className={`${bar} relative overflow-hidden rounded-full bg-base-content/20`}
+            className={`${bar} relative overflow-hidden rounded-selector bg-base-content/20`}
           >
             {i < rank && (
               <span

@@ -101,7 +101,7 @@ const SkillPopover = ({
         left: placement?.left ?? 0,
         visibility: placement ? 'visible' : 'hidden',
       }}
-      className="skill-popover fixed z-50 w-80 max-w-[calc(100vw-1rem)] rounded-2xl bg-base-100 p-4 text-left shadow-xl ring-1 ring-base-content/10"
+      className="skill-popover fixed z-50 w-80 max-w-[calc(100vw-1rem)] rounded-box bg-base-100 skill-surface-pad text-left shadow-xl ring-1 ring-base-content/10"
     >
       {placement && (
         <span
@@ -183,7 +183,7 @@ const SkillPanel = ({
       }}
     >
       <div className="skill-panel-body">
-        <div className="rounded-2xl bg-base-200 p-4 shadow-inner">
+        <div className="rounded-box bg-base-200 skill-surface-pad shadow-inner">
           <SkillDetails skill={skill} />
           <div className="mt-4 flex items-center justify-between gap-2">
             <a

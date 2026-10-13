@@ -140,7 +140,7 @@ const ThemeChanger = ({
                 : theme}
           </span>
         </div>
-        <div className="w-full flex flex-wrap items-center justify-end gap-4 md:gap-6">
+        <div className="w-full flex flex-nowrap items-center justify-around gap-2">
           {themeButton({
             name: 'emerald',
             ringColor: '#ffffff',

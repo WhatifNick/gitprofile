@@ -72,7 +72,7 @@ const SkillGroupSection = ({
             <li
               key={skill.title}
               id={skillSlug(skill.title)}
-              className="skill-row -mx-3 rounded-2xl px-3 py-3"
+              className="skill-row -mx-3 rounded-box px-3 py-3"
             >
               <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1">
                 <div className="flex items-center gap-1.5">
@@ -166,7 +166,7 @@ const SkillsPage = ({ config }: { config: Config }) => {
     allSkills.filter((s) => s.level === level).length;
 
   const filterButton = (active: boolean) =>
-    `flex w-full items-center gap-3 rounded-2xl px-3 py-2 text-left sm:px-4 transition-colors ${
+    `flex w-full items-center gap-3 rounded-box px-3 py-2 text-left sm:px-4 transition-colors ${
       active
         ? 'bg-primary/10 ring-2 ring-primary'
         : 'bg-base-200/60 hover:bg-base-200'
@@ -178,10 +178,7 @@ const SkillsPage = ({ config }: { config: Config }) => {
         Skip to content
       </a>
       <main id="main" className="min-h-full bg-base-300 p-4 lg:p-10">
-        <a
-          href={homeHref}
-          className="btn btn-ghost btn-sm mb-4 gap-1 rounded-full px-3"
-        >
+        <a href={homeHref} className="btn btn-ghost btn-sm mb-4 gap-1 px-3">
           <svg
             aria-hidden="true"
             viewBox="0 0 20 20"
@@ -267,7 +264,7 @@ const SkillsPage = ({ config }: { config: Config }) => {
                         <li key={group}>
                           <a
                             href={`#${groupId(group)}`}
-                            className="flex justify-between rounded-full"
+                            className="flex justify-between"
                           >
                             {formatGroupName(group)}
                             <span className="text-xs text-base-content/50">

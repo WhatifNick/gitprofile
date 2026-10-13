@@ -189,6 +189,12 @@ button:focus-visible,
 }
 
 /* Skill chips: desktop popover and mobile expanding panel */
+/* Popover and panel use the theme's card radius (rounded-box); themes with
+   very round corners get extra padding so text stays clear of the curve. */
+.skill-surface-pad {
+  padding: max(1rem, calc(var(--radius-box) * 0.5));
+}
+
 .skill-popover {
   animation: skill-popover-in 0.15s ease-out;
 }
