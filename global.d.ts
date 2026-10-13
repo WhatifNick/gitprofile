@@ -301,10 +301,28 @@ interface Publication extends PdfVisibility {
   description?: string;
 }
 
+type SkillLevel = 'expert' | 'proficient' | 'working' | 'familiar';
+
 interface Skill extends PdfVisibility {
   title: string;
   iconURL?: string;
   color?: string;
+  /**
+   * How confident you are with this skill. Shown in the skill popover and on
+   * the /skills page (never on the resume PDF).
+   * 'expert' | 'proficient' | 'working' | 'familiar'
+   */
+  level?: SkillLevel;
+  /** One or two sentences on how you've used it. */
+  description?: string;
+  /** Official site or docs. Shows a link button on the /skills page. */
+  url?: string;
+  /**
+   * Other names your projects' `skills` lists use for this skill, so those
+   * project chips link here, e.g. ['TanStack Query']. Case, punctuation and
+   * either half of a 'React/React Native' title already match on their own.
+   */
+  aliases?: string[];
 }
 
 interface GoogleAnalytics {

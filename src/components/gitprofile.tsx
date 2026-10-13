@@ -10,6 +10,7 @@ import {
 } from '../constants/errors';
 import '../assets/index.css';
 import { getInitialTheme, getSanitizedConfig, setupHotjar } from '../utils';
+import { pageFadeClass } from '../utils/page-fade';
 import { SanitizedConfig } from '../interfaces/sanitized-config';
 import ErrorPage from './error-page';
 import { DEFAULT_THEMES } from '../constants/default-themes';
@@ -189,7 +190,7 @@ const GitProfile = ({ config }: { config: Config }) => {
   };
 
   return (
-    <div className="fade-in h-screen">
+    <div className={`${pageFadeClass} h-screen`}>
       {error ? (
         <ErrorPage
           status={error.status}
@@ -298,6 +299,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                     <ProjectCard
                       title="Featured Projects"
                       loading={loading}
+                      skills={sanitizedConfig.skills}
                       projects={sanitizedConfig.featuredProjects}
                     />
                   )}
@@ -311,6 +313,7 @@ const GitProfile = ({ config }: { config: Config }) => {
                     <ProjectCard
                       title="Professional Projects"
                       loading={loading}
+                      skills={sanitizedConfig.skills}
                       projects={sanitizedConfig.professionalProjects}
                     />
                   )}

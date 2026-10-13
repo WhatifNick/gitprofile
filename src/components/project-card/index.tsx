@@ -1,7 +1,10 @@
+import { useMemo } from 'react';
 import { IoMdLink } from 'react-icons/io';
 import LazyImage from '../lazy-image';
-import { Project } from '../../interfaces/sanitized-config';
+import SkillChipList from '../skill-chips';
+import { Project, Skill } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
+import { createSkillLookup } from '../../utils/skills';
 import ReshiftIcon from '../../assets/reshift-icon.png';
 import GreenAndMeIcon from '../../assets/green-and-me-icon.png';
 import CyberiskIQIcon from '../../assets/cyberiskiq-icon.png';
@@ -18,11 +21,16 @@ const ProjectCard = ({
   title,
   loading,
   projects,
+  skills = {},
 }: {
   title: string;
   loading: boolean;
   projects: Project[];
+  /** The skills config, so project chips can show skill details. */
+  skills?: Record<string, Skill[]>;
 }) => {
+  const findSkill = useMemo(() => createSkillLookup(skills), [skills]);
+
   const renderSkeleton = () => {
     const array = [];
     for (let index = 0; index < projects.length; index++) {
@@ -82,15 +90,8 @@ const ProjectCard = ({
 
   const renderProjects = () => {
     return projects.map((project, index) => {
-      const Wrapper = project.link ? 'a' : 'div';
       return (
-        <Wrapper
-          className={`card shadow-lg compact bg-base-100 ${project.link ? 'cursor-pointer hover:bg-base-300 focus-visible:bg-base-300' : ''}`}
-          key={index}
-          {...(project.link
-            ? { href: project.link, target: '_blank', rel: 'noreferrer' }
-            : {})}
-        >
+        <div className="card shadow-lg compact bg-base-100" key={index}>
           <div className="px-4 py-4 md:px-8 h-full w-full">
             <div className="flex items-center flex-col md:flex-row">
               {project.imageUrl && (
@@ -125,34 +126,37 @@ const ProjectCard = ({
                       {project.description}
                     </p>
                     <div className="p-3 flow-root">
-                      <div className="-m-1 flex flex-wrap justify-start gap-2">
-                        {project.link && (
-                          <div className="badge badge-neutral font-bold items-center gap-1 text-xs">
-                            <IoMdLink style={{ marginTop: '1px' }} />
-                            {project.link}
-                          </div>
-                        )}
-                        {project.skills?.map(
-                          (skill: string, index2: number) => (
-                            <div
-                              className="badge badge-primary font-bold text-xs"
-                              key={index2}
+                      <SkillChipList
+                        className="-m-1"
+                        leading={
+                          project.link && (
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="badge badge-neutral font-bold items-center gap-1 text-xs transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md hover:brightness-125 focus-visible:-translate-y-0.5"
                             >
-                              {skill}
-                            </div>
-                          ),
-                        )}
-                      </div>
+                              <IoMdLink style={{ marginTop: '1px' }} />
+                              {project.link}
+                              <span className="sr-only">
+                                {' '}
+                                (opens in a new tab)
+                              </span>
+                            </a>
+                          )
+                        }
+                        items={(project.skills ?? []).map((label) => ({
+                          label,
+                          skill: findSkill(label),
+                        }))}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {project.link && (
-            <span className="sr-only">(opens in a new tab)</span>
-          )}
-        </Wrapper>
+        </div>
       );
     });
   };
