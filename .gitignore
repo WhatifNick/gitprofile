@@ -25,3 +25,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Private resume (contains phone number) and local secrets
+private/
+.env.local
+Claude outputs/

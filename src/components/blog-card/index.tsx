@@ -53,13 +53,13 @@ const BlogCard = ({
               <div className="w-full">
                 <div className="flex items-start px-4">
                   <div className="w-full">
-                    <h2>
+                    <h3>
                       {skeleton({
                         widthCls: 'w-full',
                         heightCls: 'h-8',
                         className: 'mb-2 mx-auto md:mx-0',
                       })}
-                    </h2>
+                    </h3>
                     {skeleton({
                       widthCls: 'w-24',
                       heightCls: 'h-3',
@@ -120,7 +120,7 @@ const BlogCard = ({
                 <div className="w-24 h-24 mask mask-squircle">
                   <LazyImage
                     src={article.thumbnail}
-                    alt={'thumbnail'}
+                    alt=""
                     placeholder={skeleton({
                       widthCls: 'w-full',
                       heightCls: 'h-full',
@@ -132,10 +132,10 @@ const BlogCard = ({
               <div className="w-full">
                 <div className="flex items-start px-4">
                   <div className="text-center md:text-left w-full">
-                    <h2 className="font-medium text-base-content opacity-60">
+                    <h3 className="font-medium text-base-content">
                       {article.title}
-                    </h2>
-                    <p className="text-base-content opacity-50 text-xs">
+                    </h3>
+                    <p className="text-base-content/80 text-xs">
                       {formatDistance(article.publishedAt, new Date(), {
                         addSuffix: true,
                       })}
@@ -171,7 +171,7 @@ const BlogCard = ({
   };
 
   return (
-    <div className="col-span-1 lg:col-span-2">
+    <div className="col-span-1">
       <div className="card bg-base-200 shadow-xl border border-base-300">
         <div className="card-body p-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">

@@ -15,12 +15,12 @@ const SkillCard = ({
         <div className="card shadow-lg compact bg-base-100 w-full" key={index}>
           <div className="flex items-start px-4 py-4 md:px-8 h-full w-full">
             <div className="text-left ">
-              <h2 className="font-medium text-base-content text-lg opacity-60">
+              <h3 className="font-medium text-base-content text-lg">
                 {skeleton({
                   widthCls: 'w-32',
                   heightCls: 'h-6',
                 })}
-              </h2>
+              </h3>
               <div className="mt-2 flex items-center flex-wrap justify-start">
                 {Array.from({ length: Math.floor(Math.random() * 10) + 2 }).map(
                   () =>
@@ -41,19 +41,19 @@ const SkillCard = ({
   };
 
   return (
-    <div className="col-span-1 lg:col-span-2">
+    <div className="col-span-1">
       <div className="grid grid-cols-2 gap-6">
         <div className="col-span-2">
           <div className="card shadow-lg compact bg-base-200">
             <div className="card-body">
               <div className="mx-3">
-                <h5 className="card-title">
+                <h2 className="card-title">
                   {loading ? (
                     skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
                   ) : (
-                    <span className="text-base-content opacity-70">Skills</span>
+                    <span className="text-base-content">Skills</span>
                   )}
-                </h5>
+                </h2>
               </div>
 
               <div className="col-span-2">
@@ -67,10 +67,10 @@ const SkillCard = ({
                         >
                           <div className="flex items-start px-4 py-4 md:px-8 h-full w-full">
                             <div className="text-left ">
-                              <h2 className="font-medium text-base-content text-lg opacity-60">
+                              <h3 className="font-medium text-base-content text-lg">
                                 {skillType.charAt(0).toUpperCase() +
                                   skillType.slice(1)}
-                              </h2>
+                              </h3>
                               <div className="p-3 flow-root">
                                 <div className="-m-1 flex flex-wrap justify-start gap-2">
                                   {skills[skillType].map((skill, index2) => (

@@ -65,15 +65,15 @@ const CommunityCard = ({
     <div className="card shadow-lg compact bg-base-100">
       <div className="card-body">
         <div className="mx-3">
-          <h5 className="card-title">
+          <h2 className="card-title">
             {loading ? (
               skeleton({ widthCls: 'w-32', heightCls: 'h-8' })
             ) : (
-              <span className="text-base-content opacity-70">Community</span>
+              <span className="text-base-content">Community</span>
             )}
-          </h5>
+          </h2>
         </div>
-        <div className="text-base-content text-opacity-60">
+        <div className="text-base-content/90">
           <ol className="relative border-l border-base-300 border-opacity-30 my-2 mx-4">
             {loading ? (
               renderSkeleton()

@@ -87,7 +87,17 @@ export const getSanitizedConfig = (
       },
       resume: {
         fileUrl: config?.resume?.fileUrl || '',
+        fileName: config?.resume?.fileName || '',
+        location: config?.resume?.location || '',
+        website: config?.resume?.website || '',
       },
+      profile: {
+        name: config?.profile?.name || config.github.username,
+        title: config?.profile?.title || '',
+        location: config?.profile?.location || '',
+        summary: config?.profile?.summary || [],
+      },
+      hobbies: config?.hobbies?.filter((hobby) => hobby.title) || [],
       skills: config?.skills || {},
       experiences:
         config?.experiences?.filter(

@@ -30,13 +30,13 @@ const GithubProjectCard = ({
             <div>
               <div className="flex items-center">
                 <span>
-                  <h5 className="card-title text-lg">
+                  <h2 className="card-title text-lg">
                     {skeleton({
                       widthCls: 'w-32',
                       heightCls: 'h-8',
                       className: 'mb-1',
                     })}
-                  </h5>
+                  </h2>
                 </span>
               </div>
               <div className="mb-5 mt-1">
@@ -94,7 +94,7 @@ const GithubProjectCard = ({
         <div className="flex justify-between flex-col p-8 h-full w-full">
           <div>
             <div className="flex items-center truncate">
-              <div className="card-title text-lg tracking-wide flex text-base-content opacity-60">
+              <div className="card-title text-lg tracking-wide flex text-base-content">
                 <MdInsertLink className="my-auto" />
                 <span>{item.name}</span>
               </div>
@@ -131,7 +131,7 @@ const GithubProjectCard = ({
 
   return (
     <Fragment>
-      <div className="col-span-1 lg:col-span-2">
+      <div className="col-span-1">
         <div className="card bg-base-200 shadow-xl border border-base-300">
           <div className="card-body p-8">
             {/* Enhanced Header Section */}

@@ -77,6 +77,10 @@
 
 :root {
   background: #161616;
+  --card-p: 1rem;
+  @media screen and (min-width: 768px) {
+    --card-p: 1.5rem;
+  }
 }
 
 body {
@@ -110,6 +114,40 @@ svg {
   transform: scale(1.01) !important;
 }
 
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 50;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--color-base-100);
+  color: var(--color-base-content);
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+a:focus-visible,
+button:focus-visible,
+.card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .pb-0-important {
   padding-bottom: 0 !important;
 }
@@ -138,4 +176,14 @@ svg {
   to {
     opacity: 1;
   }
+}
+
+.hobby-icon {
+  display: block;
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
 }

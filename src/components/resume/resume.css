@@ -1,0 +1,444 @@
+/*
+ * Resume layout. Plain CSS (not Tailwind/daisyUI) so the PDF looks the same
+ * whatever site theme is active. Sizes are in pt/mm to match print output.
+ */
+
+html.resume-root,
+html.resume-root body {
+  background: #d9d9de;
+}
+
+.r-screen {
+  --r-ink: #161616;
+  --r-muted: #4d4d4d;
+  --r-line: #2b2b2b;
+  --r-box: #ebebeb;
+  --r-focus: #0b57d0;
+
+  min-height: 100vh;
+  padding: 16px 16px 48px;
+  color: var(--r-ink);
+  font-family: 'Avenir Next', 'Avenir', 'Mulish', 'Segoe UI', sans-serif;
+  font-size: 9pt;
+  line-height: 1.4;
+}
+
+.r-screen a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.r-screen a:hover {
+  text-decoration: underline;
+}
+
+.r-screen a:focus-visible {
+  outline: 2px solid var(--r-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ---------- Toolbar (screen only) ---------- */
+.r-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px;
+  max-width: 210mm;
+  margin: 0 auto 16px;
+}
+
+.r-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--r-ink);
+  color: #fff !important;
+  font-size: 11pt;
+  font-weight: 700;
+}
+
+.r-btn-ghost {
+  background: transparent;
+  color: var(--r-ink) !important;
+  border: 1px solid var(--r-ink);
+}
+
+.r-btn svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+/* ---------- Pages ---------- */
+.r-page {
+  box-sizing: border-box;
+  max-width: 210mm;
+  margin: 0 auto 16px;
+  padding: 12mm 13mm;
+  background: #fff;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 0.15);
+}
+
+@media screen and (min-width: 840px) {
+  .r-page {
+    min-height: 297mm;
+  }
+}
+
+/* ---------- Header ---------- */
+.r-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 5mm;
+}
+
+.r-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 18px;
+  border-right: 1px solid var(--r-line);
+  min-height: 22mm;
+}
+
+.r-monogram {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 15mm;
+  height: 15mm;
+  border: 2.5px solid var(--r-ink);
+  border-radius: 50%;
+  font-size: 18pt;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.r-name {
+  margin: 0;
+  font-size: 25pt;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.06em;
+}
+
+.r-title {
+  margin: 0;
+  font-size: 10pt;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.r-contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 5px;
+  text-align: right;
+  font-size: 8.5pt;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.r-contact li {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.r-contact svg {
+  flex: none;
+  width: 11pt;
+  height: 11pt;
+}
+
+/* ---------- Summary ---------- */
+.r-summary {
+  margin-bottom: 5.5mm;
+  padding: 3.5mm 6mm;
+  border-radius: 3mm;
+  background: var(--r-box);
+  font-size: 8.75pt;
+  font-weight: 500;
+  letter-spacing: 0.035em;
+  line-height: 1.48;
+  text-align: justify;
+  hyphens: manual;
+}
+
+.r-summary p {
+  margin: 0;
+  text-indent: 2.5em;
+}
+
+.r-summary p + p {
+  margin-top: 0.9em;
+  text-indent: 0;
+}
+
+/* ---------- Columns ---------- */
+.r-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 9mm;
+}
+
+.r-flow {
+  column-count: 2;
+  column-gap: 9mm;
+}
+
+/* ---------- Sections & timeline ---------- */
+.r-section {
+  margin-bottom: 5mm;
+}
+
+.r-heading {
+  margin: 0 0 1.5mm;
+  font-size: 10pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  break-after: avoid;
+}
+
+.r-timeline {
+  list-style: none;
+  margin: 0 0 0 4px;
+  padding: 2mm 0 0 14px;
+  border-left: 1px solid var(--r-line);
+}
+
+.r-item {
+  position: relative;
+  padding-bottom: 2.6mm;
+  break-inside: avoid;
+}
+
+.r-item:last-child {
+  padding-bottom: 1mm;
+}
+
+/* hollow dot on the timeline */
+.r-item::before {
+  content: '';
+  position: absolute;
+  top: 0.3em;
+  /* centre the 9px dot on the 1px line: -(padding 14px + half line 0.5px + half dot 4.5px) */
+  left: -19px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--r-ink);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.r-item-title {
+  margin: 0;
+  font-size: 9.5pt;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.r-item-title-lg {
+  font-size: 10.5pt;
+  font-weight: 600;
+}
+
+.r-item-sub {
+  margin: 0;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.r-date,
+.r-text {
+  margin: 1px 0 0;
+  font-size: 7.75pt;
+  color: var(--r-muted);
+  letter-spacing: 0.02em;
+}
+
+.r-text + .r-built {
+  margin-top: 4px;
+}
+
+.r-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  padding: 2px 10px 2px 3px;
+  border: 1.5px solid var(--r-ink);
+  border-radius: 999px;
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.r-pill svg {
+  width: 15px;
+  height: 15px;
+  padding: 2px;
+  border-radius: 50%;
+  background: var(--r-ink);
+  color: #fff;
+}
+
+/* ---------- Skills ---------- */
+.r-skill-grid {
+  list-style: none;
+  margin: 3px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8px;
+  row-gap: 0;
+  font-size: 7.75pt;
+  color: var(--r-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Hobbies ---------- */
+.r-hobbies {
+  list-style: none;
+  margin: 3mm 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4mm 2mm;
+  text-align: center;
+  font-size: 6.75pt;
+  line-height: 1.25;
+  break-inside: avoid;
+}
+
+.r-hobbies li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.r-hobby-icon {
+  display: block;
+  width: 12mm;
+  height: 12mm;
+  object-fit: contain;
+}
+
+.r-hobby-icon-empty {
+  border: 1px solid var(--r-ink);
+  border-radius: 50%;
+}
+
+/* ---------- Small screens: reflow into one column ---------- */
+@media screen and (max-width: 720px) {
+  .r-screen {
+    padding: 12px 0 32px;
+    font-size: 10.5pt;
+  }
+
+  .r-toolbar {
+    padding: 0 16px;
+  }
+
+  .r-page {
+    padding: 20px 16px;
+    margin-bottom: 12px;
+    box-shadow: none;
+  }
+
+  .r-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .r-identity {
+    border-right: 0;
+    padding-right: 0;
+    min-height: 0;
+  }
+
+  .r-name {
+    font-size: 20pt;
+    letter-spacing: 0.03em;
+  }
+
+  .r-contact {
+    text-align: left;
+    letter-spacing: 0.04em;
+    font-size: 10pt;
+  }
+
+  .r-contact li {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  .r-summary {
+    text-align: left;
+    padding: 14px 16px;
+    font-size: 10.5pt;
+    letter-spacing: 0;
+  }
+
+  .r-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .r-flow {
+    column-count: 1;
+  }
+
+  .r-date,
+  .r-text,
+  .r-skill-grid {
+    font-size: 9.5pt;
+  }
+
+  .r-hobbies {
+    font-size: 9pt;
+  }
+}
+
+/* ---------- Print / PDF ---------- */
+@page {
+  size: A4;
+  margin: 10mm 12mm;
+}
+
+@media print {
+  html.resume-root,
+  html.resume-root body {
+    background: #fff;
+  }
+
+  .r-screen {
+    padding: 0;
+  }
+
+  .r-toolbar {
+    display: none;
+  }
+
+  .r-page {
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .r-page-1 {
+    break-after: page;
+  }
+}
