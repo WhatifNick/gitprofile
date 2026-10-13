@@ -1,3 +1,12 @@
+/**
+ * Add `hideOnPDF: true` to any list item (experience, project, skill, hobby,
+ * education, community...) to keep it on the website but leave it out of the
+ * generated resume PDF.
+ */
+interface PdfVisibility {
+  hideOnPDF?: boolean;
+}
+
 interface Github {
   /**
    * GitHub org/user name
@@ -89,7 +98,7 @@ interface Projects {
   external?: ExternalProjects;
 }
 
-interface Project {
+interface Project extends PdfVisibility {
   title: string;
   company?: string;
   description?: string;
@@ -222,9 +231,36 @@ interface Resume {
    * Resume file url
    */
   fileUrl?: string;
+
+  /**
+   * File name suggested when the resume is downloaded
+   */
+  fileName?: string;
+
+  /**
+   * Contact details printed in the resume header
+   */
+  location?: string;
+  website?: string;
 }
 
-interface Experience {
+interface ProfileConfig {
+  name?: string;
+  title?: string;
+  location?: string;
+
+  /**
+   * About me paragraphs
+   */
+  summary?: Array<string>;
+}
+
+interface Hobby extends PdfVisibility {
+  title: string;
+  icon?: string;
+}
+
+interface Experience extends PdfVisibility {
   company?: string;
   position?: string;
   from: string;
@@ -232,14 +268,14 @@ interface Experience {
   companyLink?: string;
 }
 
-interface Certification {
+interface Certification extends PdfVisibility {
   body?: string;
   name?: string;
   year?: string;
   link?: string;
 }
 
-interface Community {
+interface Community extends PdfVisibility {
   body?: string;
   name?: string;
   year?: string;
@@ -247,15 +283,16 @@ interface Community {
   description?: string;
 }
 
-interface Education {
+interface Education extends PdfVisibility {
   institution?: string;
   degree?: string;
   from: string;
   to: string;
   link?: string;
+  location?: string;
 }
 
-interface Publication {
+interface Publication extends PdfVisibility {
   title: string;
   conferenceName?: string;
   journalName?: string;
@@ -264,7 +301,7 @@ interface Publication {
   description?: string;
 }
 
-interface Skill {
+interface Skill extends PdfVisibility {
   title: string;
   iconURL?: string;
   color?: string;
@@ -405,6 +442,16 @@ interface Config {
    * Resume
    */
   resume?: Resume;
+
+  /**
+   * Name, title and about me
+   */
+  profile?: ProfileConfig;
+
+  /**
+   * Hobbies & interests
+   */
+  hobbies?: Array<Hobby>;
 
   /**
    * Google Analytics config

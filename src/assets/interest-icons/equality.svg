@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="43px" height="42px" viewBox="0 0 43 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>border</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="A4" transform="translate(-530.000000, -741.000000)">
+            <g id="Hobbies-&amp;-Interests" transform="translate(311.000000, 660.000000)">
+                <g id="row2" transform="translate(15.962152, 82.000000)">
+                    <g id="Equality" transform="translate(198.037848, 0.189353)">
+                        <ellipse id="border" stroke="#000000" stroke-width="1.2" opacity="0.600000024" cx="26.5637717" cy="20" rx="20.0481296" ry="20"></ellipse>
+                        <g id="Equality-Icon" transform="translate(14.534894, 11.190837)" fill="#545454">
+                            <rect id="Rectangle" x="-1.27897692e-13" y="0" width="24.0577555" height="8"></rect>
+                            <rect id="Rectangle-Copy" x="-1.27897692e-13" y="10.1535707" width="24.0577555" height="8"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -30,6 +30,8 @@ import Footer from './footer';
 import PublicationCard from './publication-card';
 import CommunityCard from './community-card';
 import ProjectCard from './project-card';
+import HobbiesCard from './hobbies-card';
+import AboutCard from './about-card';
 
 /**
  * Renders the GitProfile component.
@@ -91,13 +93,8 @@ const GitProfile = ({ config }: { config: Config }) => {
       }
     },
     [
-      sanitizedConfig.github.username,
       sanitizedConfig.projects.github.mode,
       sanitizedConfig.projects.github.manual.projects,
-      sanitizedConfig.projects.github.automatic.sortBy,
-      sanitizedConfig.projects.github.automatic.limit,
-      sanitizedConfig.projects.github.automatic.exclude.forks,
-      sanitizedConfig.projects.github.automatic.exclude.projects,
     ],
   );
 
@@ -111,9 +108,9 @@ const GitProfile = ({ config }: { config: Config }) => {
       // const data = response.data;
       const data = {
         avatar_url: '',
-        name: 'Nick Pasquariello',
-        bio: 'Software Engineer',
-        location: 'Brisbane, Australia',
+        name: sanitizedConfig.profile.name,
+        bio: sanitizedConfig.profile.title,
+        location: sanitizedConfig.profile.location,
         // company: 'Tech Company',
         public_repos: 0,
       };
@@ -137,7 +134,7 @@ const GitProfile = ({ config }: { config: Config }) => {
       setLoading(false);
     }
   }, [
-    sanitizedConfig.github.username,
+    sanitizedConfig.profile,
     sanitizedConfig.projects.github.display,
     getGithubProjects,
   ]);
@@ -201,23 +198,19 @@ const GitProfile = ({ config }: { config: Config }) => {
         />
       ) : (
         <>
-          <div className={`p-4 lg:p-10 min-h-full ${BG_COLOR}`}>
+          <a href="#main" className="skip-link">
+            Skip to content
+          </a>
+          <main id="main" className={`p-4 lg:p-10 min-h-full ${BG_COLOR}`}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 rounded-box">
               <div className="col-span-1">
                 <div className="grid grid-cols-1 gap-6">
-                  {!sanitizedConfig.themeConfig.disableSwitch && (
-                    <ThemeChanger
-                      theme={theme}
-                      setTheme={setTheme}
-                      loading={loading}
-                      themeConfig={sanitizedConfig.themeConfig}
-                    />
-                  )}
                   <AvatarCard
                     profile={profile}
                     loading={loading}
                     avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
                     resumeFileUrl={sanitizedConfig.resume.fileUrl}
+                    resumeFileName={sanitizedConfig.resume.fileName}
                   />
                   <DetailsCard
                     profile={profile}
@@ -225,6 +218,14 @@ const GitProfile = ({ config }: { config: Config }) => {
                     github={sanitizedConfig.github}
                     social={sanitizedConfig.social}
                   />
+                  {sanitizedConfig.profile.summary.length !== 0 && (
+                    <AboutCard
+                      id="about-mobile"
+                      className="lg:hidden"
+                      loading={loading}
+                      summary={sanitizedConfig.profile.summary}
+                    />
+                  )}
                   {sanitizedConfig.experiences.length !== 0 && (
                     <ExperienceCard
                       loading={loading}
@@ -249,16 +250,31 @@ const GitProfile = ({ config }: { config: Config }) => {
                       communities={sanitizedConfig.community}
                     />
                   )}
-                  {/* {sanitizedConfig.hobbies.length !== 0 && (
-                      <HobbiesCard
-                        loading={loading}
-                        skills={sanitizedConfig.skills}
-                      />
-                    )} */}
+                  {sanitizedConfig.hobbies.length !== 0 && (
+                    <HobbiesCard
+                      loading={loading}
+                      hobbies={sanitizedConfig.hobbies}
+                    />
+                  )}
+                  {!sanitizedConfig.themeConfig.disableSwitch && (
+                    <ThemeChanger
+                      theme={theme}
+                      setTheme={setTheme}
+                      loading={loading}
+                      themeConfig={sanitizedConfig.themeConfig}
+                    />
+                  )}
                 </div>
               </div>
               <div className="lg:col-span-2 col-span-1">
                 <div className="grid grid-cols-1 gap-6">
+                  {sanitizedConfig.profile.summary.length !== 0 && (
+                    <AboutCard
+                      className="hidden lg:flex"
+                      loading={loading}
+                      summary={sanitizedConfig.profile.summary}
+                    />
+                  )}
                   {sanitizedConfig.projects.github.display && (
                     <GithubProjectCard
                       header={sanitizedConfig.projects.github.header}
@@ -314,11 +330,8 @@ const GitProfile = ({ config }: { config: Config }) => {
                 </div>
               </div>
             </div>
-          </div>
-          <footer
-            style={{ marginBottom: '-200px' }}
-            onClick={() => setLoading(!loading)}
-          >
+          </main>
+          <footer style={{ marginBottom: '-200px' }}>
             <Footer />
           </footer>
         </>

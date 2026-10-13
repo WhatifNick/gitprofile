@@ -8,11 +8,15 @@ const Footer = () => {
   const [counter, setCounter] = useState(0);
 
   useEffect(() => {
+    // Skip the playful scroll-back for people who prefer reduced motion.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     document.addEventListener('scroll', trackScrolling);
 
     return () => {
-      window.removeEventListener('scroll', trackScrolling);
+      document.removeEventListener('scroll', trackScrolling);
     };
+    // Registered once on mount; trackScrolling manages its own re-adding.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const trackScrolling = () => {
@@ -53,10 +57,11 @@ const Footer = () => {
   };
 
   return (
-    <div className={styles.footer} ref={footerRef}>
+    <div className={styles.footer} ref={footerRef} aria-hidden="true">
       <div className={styles.wrapper}>
         <img
           src={catPaw}
+          alt=""
           className={`${styles.cat_paw} ${animate && [0, 1].includes(counter) ? styles.animate : ''}`}
         />
         <div className={styles.cat}>
@@ -74,6 +79,7 @@ const Footer = () => {
         </div>
         <img
           src={catPaw}
+          alt=""
           className={`${styles.cat_paw} ${animate && [0, 2].includes(counter) ? styles.animate : ''}`}
         />
       </div>

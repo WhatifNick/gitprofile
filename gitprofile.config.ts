@@ -78,9 +78,31 @@ const CONFIG = {
     phone: '',
     email: 'npasquariello@gmail.com',
   },
+  /**
+   * Who you are. Used by the site header card, the About section and the
+   * generated resume, so edit it here once.
+   */
+  profile: {
+    name: 'Nick Pasquariello',
+    title: 'Software Developer',
+    location: 'Brisbane, Australia',
+    summary: [
+      'Hi, my name is Nick. I am a software developer specializing in styling, user experience, and atomic design through components based development. In 2018, I started my journey as a software developer, I have honed my abilities in crafting pixel-perfect, responsive components that prioritize accessibility for all users. My attention to detail and dedication to enhancing user experience have consistently driven my success in this field. I believe that delivering a seamless and user-friendly experience is essential to building trust and confidence with users to increase engagement and satisfaction.',
+      'My proficiency in modern frontend technologies allows me to transform design concepts into efficient and visually stunning interfaces, making products not just functional, but aesthetically pleasing as well. What sets me apart is my strong alignment with values such as education, equity, and effective altruism. I find fulfillment in projects that have a positive impact on society, and I am committed to leveraging my technical expertise to contribute to meaningful initiatives.',
+    ],
+  },
   resume: {
-    fileUrl:
-      'https://drive.google.com/file/d/14bvZZvppltgbHMsEME_eh4OGHN6sxOXB/view?usp=drive_link', // Empty fileUrl will hide the `Download Resume` button.
+    // `npm run build` renders /resume to dist/resume.pdf, so this always
+    // matches the content in this file. Empty fileUrl hides the button.
+    fileUrl: '/resume.pdf',
+    fileName: 'Nick Pasquariello Resume.pdf',
+    // Contact details printed in the resume header (PDF and /resume page only).
+    location: 'Brisbane, QLD',
+    website: 'nick.cat',
+    // Your phone number is NOT stored here: everything in this file ends up
+    // in the public website code. Put it in `.env.local` as RESUME_PHONE and
+    // the build adds it to a private copy of the PDF only
+    // (private/<fileName>), which is never uploaded.
   },
   experiences: [
     {
@@ -125,6 +147,7 @@ const CONFIG = {
       from: 'February 2018',
       to: 'August 2018',
       link: 'https://coderacademy.edu.au/',
+      location: 'Brisbane, Australia',
     },
     {
       institution: 'Georgia Institute of Technology',
@@ -132,7 +155,21 @@ const CONFIG = {
       from: 'August 2011',
       to: 'May 2015',
       link: 'https://www.gatech.edu/',
+      location: 'Atlanta, Georgia',
     },
+  ],
+  // `icon` is a file name (without .svg) from src/assets/interest-icons.
+  // Tip: add `hideOnPDF: true` to any item in this file (a project, job,
+  // skill, hobby...) to keep it on the website but drop it from the PDF.
+  hobbies: [
+    { title: 'Drag Race', icon: 'drag-race' },
+    { title: 'Podcasts', icon: 'podcasts' },
+    { title: 'D&D / Board Games', icon: 'board-games' },
+    { title: 'Accessibility', icon: 'accessibility' },
+    { title: 'Sustainability & Environment', icon: 'sustainability' },
+    { title: 'Travel', icon: 'travel' },
+    { title: 'Cats', icon: 'cats' },
+    { title: 'Equality & Equity', icon: 'equality' },
   ],
   certifications: [],
   community: [
@@ -361,7 +398,7 @@ const CONFIG = {
   //   limit: 2, // How many articles to display. Max is 10.
   // },
   googleAnalytics: {
-    id: '', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
+    id: 'G-HKNL6N8WNL', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
   },
   // Track visitor interaction and behavior. https://www.hotjar.com
   hotjar: { id: '', snippetVersion: 6 },

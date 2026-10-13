@@ -1,3 +1,8 @@
+/** `hideOnPDF: true` keeps an item on the website but out of the resume PDF. */
+export interface PdfVisibility {
+  hideOnPDF?: boolean;
+}
+
 export interface SanitizedGithub {
   username: string;
 }
@@ -67,9 +72,24 @@ export interface SanitizedSocial {
 
 export interface SanitizedResume {
   fileUrl?: string;
+  fileName?: string;
+  location?: string;
+  website?: string;
 }
 
-export interface SanitizedExperience {
+export interface SanitizedProfile {
+  name: string;
+  title: string;
+  location: string;
+  summary: Array<string>;
+}
+
+export interface SanitizedHobby extends PdfVisibility {
+  title: string;
+  icon?: string;
+}
+
+export interface SanitizedExperience extends PdfVisibility {
   company?: string;
   position?: string;
   from: string;
@@ -77,14 +97,14 @@ export interface SanitizedExperience {
   companyLink?: string;
 }
 
-export interface SanitizedCertification {
+export interface SanitizedCertification extends PdfVisibility {
   body?: string;
   name?: string;
   year?: string;
   link?: string;
 }
 
-export interface SanitizedCommunity {
+export interface SanitizedCommunity extends PdfVisibility {
   body?: string;
   name?: string;
   year?: string;
@@ -92,7 +112,7 @@ export interface SanitizedCommunity {
   description?: string;
 }
 
-export interface Project {
+export interface Project extends PdfVisibility {
   title: string;
   company?: string;
   description?: string;
@@ -101,21 +121,22 @@ export interface Project {
   skills?: Array<string>;
 }
 
-export interface Skill {
+export interface Skill extends PdfVisibility {
   title: string;
   iconURL?: string;
   color?: string;
 }
 
-export interface SanitizedEducation {
+export interface SanitizedEducation extends PdfVisibility {
   institution?: string;
   degree?: string;
   from: string;
   to: string;
   link?: string;
+  location?: string;
 }
 
-export interface SanitizedPublication {
+export interface SanitizedPublication extends PdfVisibility {
   title: string;
   conferenceName?: string;
   journalName?: string;
@@ -156,6 +177,8 @@ export interface SanitizedConfig {
   seo: SanitizedSEO;
   social: SanitizedSocial;
   resume: SanitizedResume;
+  profile: SanitizedProfile;
+  hobbies: Array<SanitizedHobby>;
   skills: Record<string, Skill[]>;
   experiences: Array<SanitizedExperience>;
   educations: Array<SanitizedEducation>;

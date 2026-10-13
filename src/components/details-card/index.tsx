@@ -73,21 +73,27 @@ const ListItem: React.FC<{
       <div
         className={`${
           skeleton ? 'grow' : ''
-        } text-sm font-normal text-right mr-2 ml-3 ${link ? 'truncate' : ''}`}
+        } text-sm font-normal text-right mr-2 ml-3`}
         style={{
           wordBreak: 'break-word',
         }}
       >
-        <a
-          href={link}
-          target="_blank"
-          rel="noreferrer"
-          className="flex justify-start py-2 px-1 items-center gap-1"
-        >
-          {link && <IoMdLink />}
-
-          {value}
-        </a>
+        {link ? (
+          <a
+            href={link}
+            {...(link.startsWith('http')
+              ? { target: '_blank', rel: 'noreferrer' }
+              : {})}
+            className="flex justify-start py-2 px-1 items-center gap-1 link link-hover"
+          >
+            <IoMdLink aria-hidden="true" focusable="false" />
+            {value}
+          </a>
+        ) : (
+          <span className="flex justify-start py-2 px-1 items-center gap-1">
+            {value}
+          </span>
+        )}
       </div>
     </div>
   );
@@ -359,7 +365,7 @@ const DetailsCard = ({ profile, loading, social, github }: Props) => {
                   icon={<RiMailFill />}
                   title="Email:"
                   value={social.email}
-                  // link={`mailto:${social.email}`}
+                  link={`mailto:${social.email}`}
                 />
               )}
               {social?.discord && (

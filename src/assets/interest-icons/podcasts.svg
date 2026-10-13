@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="42px" height="42px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>border</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="A4" transform="translate(-394.000000, -680.000000)">
+            <g id="Hobbies-&amp;-Interests" transform="translate(311.000000, 660.000000)">
+                <g id="row1" transform="translate(18.000000, 20.000000)">
+                    <g id="Podcasts" transform="translate(66.000000, 1.000000)">
+                        <ellipse id="border" stroke="#000000" stroke-width="1.2" opacity="0.600000024" cx="20.0481296" cy="20" rx="20.0481296" ry="20"></ellipse>
+                        <path d="M27,31 L27.708,31 L27.708,20 L27,20 L27,31 Z M12,31 L12.708,31 L12.708,20 L12,20 L12,31 Z M28.8143268,31 L28.8143268,28.9161765 L28.7879739,28.9161765 C28.7982222,28.7426471 28.8143268,28.5705882 28.8143268,28.3955882 L28.8143268,19.5411765 L28.8143268,16.9367647 C28.8143268,12.0470588 24.8672418,8.08382353 19.999268,8.08382353 C15.1312941,8.08382353 11.1856732,12.0470588 11.1856732,16.9367647 L11.1856732,19.5411765 L11.1856732,28.3955882 C11.1856732,28.5705882 11.2003137,28.7426471 11.2105621,28.9161765 L11.1856732,28.9161765 L11.1856732,31 C11.1856732,31 6,30.9117647 6,25.2705882 C6,22.0691176 7.6660915,20.6588235 9.11111111,20.0352941 L9.11111111,16.9367647 C9.11111111,10.8970588 13.9864052,6 19.999268,6 C26.0121307,6 30.8888889,10.8970588 30.8888889,16.9367647 L30.8888889,20.0352941 C32.3324444,20.6588235 34,22.0691176 34,25.2705882 C34,30.9117647 28.8143268,31 28.8143268,31 L28.8143268,31 Z" id="Headphones-Icon" fill="#000000" opacity="0.650000036"></path>
+                    </g>
+                </g>
+            </g>
+            <g id="Community" transform="translate(310.000000, 565.000000)" font-family="AvenirNext-Medium, Avenir Next" font-size="7" font-weight="400" letter-spacing="0.400000006">
+                <g id="Scrunch-Blog-Copy" transform="translate(-0.000000, 21.517347)">
+                    <text id="location">
+                        <tspan x="21" y="31" fill="#4A4A4A">Working with like minded individuals to create a safe and inclusive </tspan>
+                        <tspan x="21" y="41" fill="#4A4A4A">environment to work in. Create events to educate, celebrate, and </tspan>
+                        <tspan x="21" y="51" fill="#4A4A4A">create understanding around LGBT+ community.</tspan>
+                        <tspan x="21" y="61" fill="#000000">Nominated for a Diversity, Inclusion, &amp; Belonging Award</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

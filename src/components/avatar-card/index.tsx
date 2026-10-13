@@ -3,12 +3,14 @@ import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
 import LazyImage from '../lazy-image';
 import headshot from '../../assets/headshot.jpg';
+import { MdFileDownload } from 'react-icons/md';
 
 interface AvatarCardProps {
   profile: Profile | null;
   loading: boolean;
   avatarRing: boolean;
   resumeFileUrl?: string;
+  resumeFileName?: string;
 }
 
 /**
@@ -24,6 +26,7 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
   loading,
   avatarRing,
   resumeFileUrl,
+  resumeFileName,
 }): React.JSX.Element => {
   return (
     <div className="card shadow-lg card-sm bg-base-100">
@@ -62,15 +65,13 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
           </div>
         )}
         <div className="text-center mx-auto px-8">
-          <h5 className="font-bold text-2xl">
+          <h1 className="font-bold text-2xl">
             {loading || !profile ? (
               skeleton({ widthCls: 'w-48', heightCls: 'h-8' })
             ) : (
-              <span className="text-base-content opacity-70">
-                {profile.name}
-              </span>
+              <span className="text-base-content">{profile.name}</span>
             )}
-          </h5>
+          </h1>
           <div className="mt-3 text-base-content font-mono">
             {loading || !profile
               ? skeleton({ widthCls: 'w-48', heightCls: 'h-5' })
@@ -83,15 +84,20 @@ const AvatarCard: React.FC<AvatarCardProps> = ({
               {skeleton({ widthCls: 'w-40', heightCls: 'h-8' })}
             </div>
           ) : (
-            <a
-              href={resumeFileUrl}
-              target="_blank"
-              className="btn btn-outline btn-sm text-xs mt-6 opacity-50"
-              download
-              rel="noreferrer"
-            >
-              Download Resume
-            </a>
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
+              <a
+                href={resumeFileUrl}
+                className="btn btn-outline btn-sm"
+                download={resumeFileName || true}
+              >
+                <MdFileDownload aria-hidden="true" focusable="false" />
+                Download Resume
+                <span className="sr-only">(PDF)</span>
+              </a>
+              <a href="resume" className="btn btn-ghost btn-sm">
+                View resume
+              </a>
+            </div>
           ))}
       </div>
     </div>

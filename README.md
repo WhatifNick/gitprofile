@@ -137,6 +137,27 @@ As this is a Vite project, you can also host your website to Netlify, Vercel, He
 
 > Alternatively, you can set up and run the project using Docker with **[Vail](https://github.com/arifszn/vail)**, a powerful tool for local development of JavaScript/TypeScript Apps.
 
+## 📄 Resume PDF
+
+`npm run build` also turns the `/resume` page into PDFs, using the content in `gitprofile.config.ts`:
+
+- `dist/resume.pdf`: public copy, deployed with the site (linked from the **Download Resume** button). No phone number.
+- `private/<resume.fileName>`: private copy with your phone number, for sending with applications. Never deployed and git-ignored.
+
+Setup and tips:
+
+- Put your phone number in `.env.local` (git-ignored), not in the config, because the config is compiled into the public site:
+
+  ```bash
+  RESUME_PHONE=0400 000 000
+  ```
+
+  The build fails if that number ever shows up in `dist/`.
+
+- Add `hideOnPDF: true` to any list item (project, experience, skill, hobby…) to keep it on the website but leave it out of the PDF. The build warns if the PDF runs past 2 pages.
+- Hobby icons live in `src/assets/interest-icons/`. Set `hobbies[].icon` to the file name without `.svg`.
+- `npm run resume:pdf` regenerates only the PDFs after a build.
+
 ## 🎨 Customization
 
 All the magic happens in the file `gitprofile.config.ts`. Open it and modify it according to your preference.

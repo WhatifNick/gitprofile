@@ -20,13 +20,13 @@ const PublicationCard = ({
               <div className="w-full">
                 <div className="px-4">
                   <div className="text-center w-full">
-                    <h2 className="mb-2">
+                    <h3 className="mb-2">
                       {skeleton({
                         widthCls: 'w-32',
                         heightCls: 'h-8',
                         className: 'mb-2 mx-auto',
                       })}
-                    </h2>
+                    </h3>
                     <div>
                       {skeleton({
                         widthCls: 'w-20',
@@ -88,19 +88,19 @@ const PublicationCard = ({
             <div className="w-full">
               <div className="px-4">
                 <div className="text-center w-full">
-                  <h2 className="font-medium opacity-60 mb-2">{item.title}</h2>
+                  <h3 className="font-medium mb-2">{item.title}</h3>
                   {item.conferenceName && (
-                    <p className="text-base-content opacity-50 text-sm">
+                    <p className="text-base-content/80 text-sm">
                       {item.conferenceName}
                     </p>
                   )}
                   {item.journalName && (
-                    <p className="text-base-content opacity-50 text-sm">
+                    <p className="text-base-content/80 text-sm">
                       {item.journalName}
                     </p>
                   )}
                   {item.authors && (
-                    <p className="text-base-content opacity-50 text-sm">
+                    <p className="text-base-content/80 text-sm">
                       Author: {item.authors}
                     </p>
                   )}
@@ -120,7 +120,7 @@ const PublicationCard = ({
 
   return (
     <Fragment>
-      <div className="col-span-1 lg:col-span-2">
+      <div className="col-span-1">
         <div className="card bg-base-200 shadow-xl border border-base-300">
           <div className="card-body p-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
