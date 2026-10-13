@@ -266,75 +266,418 @@ const CONFIG = {
       link: 'https://greenand.me/',
     },
   ],
+  /**
+   * Skills, grouped by heading. Each skill can have:
+   *  - level: 'expert' | 'proficient' | 'working' | 'familiar'
+   *  - description: a sentence or two on how you've used it
+   *  - aliases: other names your projects use for it (for chip links)
+   * Levels and descriptions show in the skill popover and on /skills, never
+   * on the resume PDF.
+   *
+   * TODO(Nick): levels and descriptions below are first drafts written from
+   * your projects and job history. Review and adjust before merging.
+   */
   skills: {
     languages: [
-      { title: 'JavaScript' },
-      { title: 'TypeScript' },
-      { title: 'HTML' },
-      { title: 'CSS/SCSS/SASS' },
-      { title: 'Liquid' },
-      { title: 'Ruby' },
+      {
+        title: 'JavaScript',
+        url: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+        level: 'expert',
+        description:
+          'My daily language since 2018, from AngularJS apps through to modern React codebases.',
+      },
+      {
+        title: 'TypeScript',
+        url: 'https://www.typescriptlang.org/',
+        level: 'expert',
+        description:
+          'JavaScript, with more type safety. Default for every project since 2021. I lean on strong types to make component APIs self-documenting and refactors safe.',
+      },
+      {
+        title: 'HTML',
+        url: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
+        level: 'expert',
+        description:
+          'Semantic, accessible markup is where every component I build starts. Less is more when it comes to HTML structure.',
+      },
+      {
+        title: 'CSS/SCSS/SASS',
+        url: 'https://developer.mozilla.org/en-US/docs/Web/CSS',
+        level: 'expert',
+        description:
+          "CSS, SCSS, SASS: it's all the same in different packages. Don't get me started. I love styling and will spend all day on it if I could.",
+      },
+      {
+        title: 'Liquid',
+        url: 'https://shopify.github.io/liquid/',
+        level: 'working',
+        description:
+          'Built and customized storefront templates with Shopify-style Liquid.',
+      },
+      {
+        title: 'Ruby',
+        url: 'https://www.ruby-lang.org/',
+        level: 'familiar',
+        description:
+          "This was my first ever programming language! Haven't used it much since, but it always has a special place in my heart.",
+      },
     ],
     frameworks: [
-      { title: 'React/React Native' },
-      { title: 'Angular/AngularJS' },
-      { title: 'Vue' },
-      { title: 'Next.js' },
-      { title: 'Ruby on Rails' },
+      {
+        title: 'React/React Native',
+        url: 'https://react.dev/',
+        level: 'expert',
+        description:
+          'My main framework across six roles: greenfield apps, large rewrites, component libraries and performance work.',
+      },
+      {
+        title: 'Angular/AngularJS',
+        url: 'https://angular.dev/',
+        level: 'proficient',
+        description:
+          'Built features in Angular at Degreed and led an AngularJS-to-React migration at Mojo Soup.',
+      },
+      {
+        title: 'Next.js',
+        url: 'https://nextjs.org/',
+        level: 'proficient',
+        description:
+          'Fast becoming one of my favorite frameworks. Built the NYSD marketing site on Next.js with a headless CMS and Vercel deploys.',
+      },
+      {
+        title: 'Vue',
+        url: 'https://vuejs.org/',
+        level: 'working',
+        description:
+          "Another JS framework. They're all the same when you get down to it, but Vue makes it fun.",
+      },
+      {
+        title: 'Ruby on Rails',
+        url: 'https://rubyonrails.org/',
+        level: 'familiar',
+        description:
+          'Built full-stack Rails apps while studying at Coder Academy.',
+      },
     ],
-    design: [{ title: 'Sketch' }, { title: 'Figma' }],
+    design: [
+      {
+        title: 'Sketch',
+        url: 'https://www.sketch.com/',
+        level: 'proficient',
+        description:
+          'Self taught through some Udemy and YouTube courses, I often use sketch to mock up my websites before development.',
+      },
+      {
+        title: 'Figma',
+        url: 'https://www.figma.com/',
+        level: 'proficient',
+        description:
+          "It's Sketch, on the web! Love a good FigJam. I've turned many Figma designs into working components and pages.",
+      },
+    ],
     styling: [
-      { title: 'Material UI' },
-      { title: 'Semantic UI' },
-      { title: 'Fluent UI' },
-      { title: 'Tailwind CSS' },
-      { title: 'CSS Modules' },
-      { title: 'BEM Methodology' },
-      { title: 'Bootstrap' },
-      { title: 'Styled Components' },
+      {
+        title: 'Material UI',
+        url: 'https://mui.com/material-ui/',
+        aliases: ['Material UI (MUI X + Core)'],
+        level: 'expert',
+        description:
+          'Used on almost every app I have built since 2019, including theming, custom components and contributing to a company Storybook library.',
+      },
+      {
+        title: 'Semantic UI',
+        url: 'https://semantic-ui.com/',
+        level: 'proficient',
+        description:
+          'Very similar to Material UI or other component libraries.',
+      },
+      {
+        title: 'Fluent UI',
+        url: 'https://developer.microsoft.com/en-us/fluentui',
+        level: 'working',
+        description:
+          'Used for Microsoft-ecosystem apps alongside SharePoint and Power Apps.',
+      },
+      {
+        title: 'Tailwind CSS',
+        url: 'https://tailwindcss.com/',
+        level: 'proficient',
+        description:
+          'My go-to for personal and client sites, including this one.',
+      },
+      {
+        title: 'CSS Modules',
+        url: 'https://github.com/css-modules/css-modules',
+        level: 'proficient',
+        description:
+          'Locally scoped component styles, used heavily in the Studio 71 search filters overhaul.',
+      },
+      {
+        title: 'BEM Methodology',
+        url: 'https://getbem.com/',
+        level: 'proficient',
+        description:
+          'Naming convention I use to keep plain CSS predictable at scale.',
+      },
+      {
+        title: 'Bootstrap',
+        url: 'https://getbootstrap.com/',
+        level: 'proficient',
+        description: 'Used in earlier projects for fast, responsive layouts.',
+      },
+      {
+        title: 'Styled Components',
+        url: 'https://styled-components.com/',
+        level: 'proficient',
+        description:
+          'CSS-in-JS for themeable React component libraries. Fun to use, but seems less useful with enhancements to modern frameworks.',
+      },
     ],
     'Charts & Graphics': [
-      { title: 'D3.js' },
-      { title: 'Highcharts' },
-      { title: 'ApexCharts' },
-      { title: 'AG Charts' },
-      { title: 'MUI X' },
-      { title: 'Recharts' },
+      {
+        title: 'MUI X',
+        url: 'https://mui.com/x/',
+        level: 'proficient',
+        description:
+          "Date pickers, data grids and charts. I'm very familiar with these components; strengths and limitations.",
+      },
+      {
+        title: 'Highcharts',
+        url: 'https://www.highcharts.com/',
+        level: 'proficient',
+        description:
+          'Used to visualized learner skill progress on the Degreed profile overview page.',
+      },
+      {
+        title: 'D3.js',
+        url: 'https://d3js.org/',
+        level: 'working',
+        description: 'Custom, bespoke data visualizations.',
+      },
+
+      {
+        title: 'ApexCharts',
+        url: 'https://apexcharts.com/',
+        level: 'working',
+        description: 'Dashboard charts for reporting tools.',
+      },
+      {
+        title: 'AG Charts',
+        url: 'https://www.ag-grid.com/charts/',
+        level: 'proficient',
+        description: 'Charts paired with AG Grid data in reporting apps.',
+      },
+      {
+        title: 'Recharts',
+        url: 'https://recharts.org/',
+        level: 'working',
+        description: 'Lightweight React charts for dashboards.',
+      },
     ],
     databases: [
-      { title: 'Azure' },
-      { title: 'Supabase' },
-      { title: 'Firebase' },
-      { title: 'MongoDB' },
-      { title: 'PostgreSQL' },
-      { title: 'SQLite' },
+      {
+        title: 'Azure',
+        url: 'https://azure.microsoft.com/',
+        level: 'proficient',
+        description:
+          'Backend and hosting for the Mojo Soup medical timesheet app.',
+      },
+      {
+        title: 'Supabase',
+        url: 'https://supabase.com/',
+        level: 'proficient',
+        description:
+          'Auth, Postgres and row-level security behind Reshift, my shift manager app.',
+      },
+      {
+        title: 'Firebase',
+        url: 'https://firebase.google.com/',
+        level: 'working',
+        description:
+          'Auth, Firestore and hosting; Green & Me and this site run on it.',
+      },
+      {
+        title: 'PostgreSQL',
+        url: 'https://www.postgresql.org/',
+        level: 'working',
+        description: 'Schema design and queries, mostly through Supabase.',
+      },
+      {
+        title: 'MongoDB',
+        url: 'https://www.mongodb.com/',
+        level: 'familiar',
+        description: 'Document storage in study and side projects.',
+      },
+      {
+        title: 'SQLite',
+        url: 'https://www.sqlite.org/',
+        level: 'familiar',
+        description: 'Local storage for small apps and prototypes.',
+      },
     ],
     platforms: [
-      { title: 'Vercel' },
-      { title: 'Sanity' },
-      { title: 'Atlassian/Jira' },
-      { title: 'GitHub' },
-      { title: 'GitLab' },
-      { title: 'Bitbucket' },
-      { title: 'Power BI/Sharepoint' },
-      { title: 'Hubspot' },
-      { title: 'Squarespace' },
-      { title: 'Decap CMS' },
-      { title: 'Resend', hideOnPDF: true },
+      {
+        title: 'Atlassian/Jira',
+        url: 'https://www.atlassian.com/software/jira',
+        level: 'proficient',
+        description:
+          'Agile boards, sprints and docs in every team I have joined.',
+      },
+      {
+        title: 'Vercel',
+        url: 'https://vercel.com/',
+        level: 'proficient',
+        description: 'Deploys and preview environments for client sites.',
+      },
+      {
+        title: 'Sanity',
+        url: 'https://www.sanity.io/',
+        level: 'working',
+        description: 'Headless CMS schemas and content modelling for NYSD.',
+      },
+      {
+        title: 'GitHub',
+        url: 'https://github.com/',
+        level: 'proficient',
+        description: "It's my bread and butter.",
+      },
+      {
+        title: 'GitLab',
+        url: 'https://about.gitlab.com/',
+        level: 'proficient',
+        description: 'You push, you pull. Same as github.',
+      },
+      {
+        title: 'Bitbucket',
+        url: 'https://bitbucket.org/',
+        level: 'proficient',
+        description: 'You push, you pull. Same as github.',
+      },
+      {
+        title: 'Power BI/Sharepoint',
+        url: 'https://www.microsoft.com/en-us/microsoft-365/sharepoint',
+        level: 'working',
+        description:
+          'Built SharePoint-backed React apps for Queensland government clients.',
+      },
+      {
+        title: 'Hubspot',
+        url: 'https://www.hubspot.com/',
+        level: 'working',
+        description: 'Forms and CRM integrations on marketing sites.',
+      },
+      {
+        title: 'Squarespace',
+        url: 'https://www.squarespace.com/',
+        level: 'working',
+        description: 'Small-business sites and custom code injection.',
+      },
+      {
+        title: 'Decap CMS',
+        url: 'https://decapcms.org/',
+        level: 'working',
+        description:
+          'Git-based CMS powering the editable blog and quiz on CyberiskIQ.',
+      },
+      {
+        title: 'Resend',
+        url: 'https://resend.com/',
+        level: 'working',
+        hideOnPDF: true,
+        description: 'Transactional email from contact forms.',
+      },
+      {
+        title: 'WordPress',
+        url: 'https://wordpress.org/',
+        level: 'familiar',
+        hideOnPDF: true,
+        description:
+          'Content management and blogging platform. Hate to use it, love to see it replaced by better solutions when possible. Contact me for help.',
+      },
     ],
     // Packages show on the website only (hideOnPDF on every item hides the
     // whole group from the resume PDF).
     packages: [
-      { title: 'tanstack/react-query' },
-      { title: 'react-router-dom' },
-      { title: 'redux' },
-      { title: 'ag-grid' },
-      { title: 'react-hook-form', hideOnPDF: true },
-      { title: 'yup', hideOnPDF: true },
-      { title: 'react-big-calendar', hideOnPDF: true },
-      { title: 'lodash', hideOnPDF: true },
+      {
+        title: 'tanstack/react-query',
+        url: 'https://tanstack.com/query',
+        aliases: ['TanStack Query'],
+        level: 'proficient',
+        description:
+          'Server-state caching that let me remove thousands of lines of hand-rolled fetching code at Transmax.',
+      },
+      {
+        title: 'react-router-dom',
+        url: 'https://reactrouter.com/',
+        level: 'proficient',
+        description: 'Routing for single-page React apps.',
+      },
+      {
+        title: 'redux',
+        url: 'https://redux.js.org/',
+        level: 'proficient',
+        description: 'Global state for larger React apps.',
+      },
+      {
+        title: 'ag-grid',
+        url: 'https://www.ag-grid.com/',
+        level: 'proficient',
+        description:
+          'Large, editable data grids with custom cell renderers across several Mojo Soup apps.',
+      },
+      {
+        title: 'react-hook-form',
+        url: 'https://react-hook-form.com/',
+        level: 'proficient',
+        hideOnPDF: true,
+        description: 'Performant forms, including a reusable form builder.',
+      },
+      {
+        title: 'yup',
+        url: 'https://www.npmjs.com/package/yup',
+        level: 'working',
+        hideOnPDF: true,
+        description: 'Schema validation paired with react-hook-form.',
+      },
+      {
+        title: 'react-big-calendar',
+        url: 'https://github.com/jquense/react-big-calendar',
+        level: 'working',
+        hideOnPDF: true,
+        description:
+          'Used to create shift and timesheet calendar application at Mojo Soup.',
+      },
+      {
+        title: 'lodash',
+        url: 'https://lodash.com/',
+        level: 'proficient',
+        hideOnPDF: true,
+        description:
+          "Everyday data utilities. We don't need to reinvent the wheel.",
+      },
     ],
-    agents: [{ title: 'Claude' }, { title: 'ChatGPT' }, { title: 'Copilot' }],
+    agents: [
+      {
+        title: 'Claude',
+        url: 'https://anthropic.com/claude',
+        level: 'proficient',
+        description:
+          'Pair-programming, refactors and code review in my daily workflow.',
+      },
+      {
+        title: 'Copilot',
+        url: 'https://github.com/features/copilot',
+        level: 'proficient',
+        description: 'Inline completions in the editor.',
+      },
+      {
+        title: 'ChatGPT',
+        url: 'https://chatgpt.com/',
+        level: 'working',
+        description:
+          'Built a ChatGPT-powered messaging interface at Studio 71.',
+      },
+    ],
   },
   professionalProjects: [
     {
