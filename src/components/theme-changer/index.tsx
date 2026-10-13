@@ -26,6 +26,7 @@ const ThemeChanger = ({
   themeConfig: SanitizedThemeConfig;
 }) => {
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const [isOpen, setIsOpen] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(0);
@@ -51,6 +52,18 @@ const ThemeChanger = ({
       setIsOpen(false);
     }
   };
+
+  // Close when tapping/clicking anywhere outside the menu.
+  useEffect(() => {
+    if (!isOpen) return;
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!dropdownRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('pointerdown', handlePointerDown);
+    return () => document.removeEventListener('pointerdown', handlePointerDown);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen && itemRefs.current[focusedIndex]) {
@@ -161,8 +174,12 @@ const ThemeChanger = ({
             })
           ) : (
             <div
+              ref={dropdownRef}
               title="Change Theme"
-              className="dropdown dropdown-end"
+              // `dropdown-open` makes daisyUI show the menu from React state.
+              // Without it the menu only shows while the button has focus,
+              // and iOS Safari doesn't focus buttons on tap.
+              className={`dropdown dropdown-end ${isOpen ? 'dropdown-open' : ''}`}
               onKeyDown={handleKeyDown}
             >
               <button

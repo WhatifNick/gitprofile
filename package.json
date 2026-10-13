@@ -19,7 +19,7 @@
     "prettier": "prettier --check \"./**/*.{js,jsx,ts,tsx,css,md,json}\"",
     "prettier:fix": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\"",
     "preview": "vite preview",
-    "deploy": "firebase deploy"
+    "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
     "react": "^19.1.0",
