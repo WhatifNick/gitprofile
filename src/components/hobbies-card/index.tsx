@@ -23,13 +23,13 @@ const HobbiesCard = ({
           )}
         </h2>
       </div>
-      <ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-4 mt-2 text-center text-xs text-base-content">
+      <ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-x-2 gap-y-4 mt-2 text-center text-sm text-base-content">
         {hobbies.map((hobby) => {
           const iconUrl = getHobbyIconUrl(hobby.icon);
           return (
             <li key={hobby.title} className="flex flex-col items-center gap-1">
               {loading ? (
-                skeleton({ widthCls: 'w-12', heightCls: 'h-12' })
+                skeleton({ widthCls: 'w-20', heightCls: 'h-20' })
               ) : (
                 <>
                   {iconUrl ? (
@@ -37,7 +37,7 @@ const HobbiesCard = ({
                     // colour and stays visible on dark themes.
                     <span
                       aria-hidden="true"
-                      className="hobby-icon w-14 h-14 bg-current text-base-content/85"
+                      className="hobby-icon w-20 h-20 bg-current text-base-content/85"
                       style={{
                         maskImage: `url("${iconUrl}")`,
                         WebkitMaskImage: `url("${iconUrl}")`,
@@ -46,7 +46,7 @@ const HobbiesCard = ({
                   ) : (
                     <span
                       aria-hidden="true"
-                      className="w-14 h-14 rounded-full border-2 border-base-content/60"
+                      className="w-20 h-20 rounded-full border-2 border-base-content/60"
                     />
                   )}
                   {hobby.title}

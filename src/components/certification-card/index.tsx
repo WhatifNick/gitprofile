@@ -18,7 +18,7 @@ const ListItem = ({
       className="absolute w-2 h-2 bg-base-300 rounded-full border border-base-300 mt-1.5"
       style={{ left: '-4.5px' }}
     ></div>
-    <div className="my-0.5 text-xs">{year}</div>
+    <div className="my-0.5 text-sm">{year}</div>
     <div className="font-medium">
       <a href={link} target="_blank" rel="noreferrer">
         {name}
