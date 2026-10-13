@@ -10,7 +10,8 @@ html.resume-root body {
 
 .r-screen {
   --r-ink: #161616;
-  --r-muted: #4d4d4d;
+  /* secondary text: still a step lighter than headings, but easy to read */
+  --r-muted: #262626;
   --r-line: #2b2b2b;
   --r-box: #ebebeb;
   --r-focus: #0b57d0;
@@ -77,7 +78,8 @@ html.resume-root body {
   box-sizing: border-box;
   max-width: 210mm;
   margin: 0 auto 16px;
-  padding: 12mm 13mm;
+  /* same as the @page margins, so screen and PDF lay out identically */
+  padding: 10mm 12mm;
   background: #fff;
   box-shadow: 0 2px 12px rgb(0 0 0 / 0.15);
 }
@@ -94,7 +96,7 @@ html.resume-root body {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  margin-bottom: 5mm;
+  margin-bottom: calc(5mm * var(--r-space, 1));
 }
 
 .r-identity {
@@ -122,7 +124,7 @@ html.resume-root body {
 .r-name {
   margin: 0;
   font-size: 25pt;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.1;
   letter-spacing: 0.06em;
 }
@@ -161,7 +163,7 @@ html.resume-root body {
 
 /* ---------- Summary ---------- */
 .r-summary {
-  margin-bottom: 5.5mm;
+  margin-bottom: calc(5.5mm * var(--r-space, 1));
   padding: 3.5mm 6mm;
   border-radius: 3mm;
   background: var(--r-box);
@@ -190,14 +192,33 @@ html.resume-root body {
   column-gap: 9mm;
 }
 
-.r-flow {
-  column-count: 2;
-  column-gap: 9mm;
-}
-
 /* ---------- Sections & timeline ---------- */
 .r-section {
-  margin-bottom: 5mm;
+  /* --r-space shrinks the gaps a little when needed to fit on 2 pages */
+  margin-bottom: calc(5mm * var(--r-space, 1));
+}
+
+/* No trailing gap at the bottom of a column, so a full page never spills
+   a blank extra page. */
+.r-cols > div > .r-section:last-child {
+  margin-bottom: 0;
+}
+
+/* Both columns on a page are as tall as the taller one; stretching the last
+   section's timeline makes the two lines end at the same point. */
+.r-cols > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.r-cols > div > .r-section:last-child {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.r-cols > div > .r-section:last-child > .r-timeline {
+  flex: 1 0 auto;
 }
 
 .r-heading {
@@ -218,7 +239,7 @@ html.resume-root body {
 
 .r-item {
   position: relative;
-  padding-bottom: 2.6mm;
+  padding-bottom: calc(2.6mm * var(--r-space, 1));
   break-inside: avoid;
 }
 
@@ -264,6 +285,7 @@ html.resume-root body {
   margin: 1px 0 0;
   font-size: 7.75pt;
   color: var(--r-muted);
+  font-weight: 500;
   letter-spacing: 0.02em;
 }
 
@@ -304,6 +326,7 @@ html.resume-root body {
   row-gap: 0;
   font-size: 7.75pt;
   color: var(--r-muted);
+  font-weight: 500;
   letter-spacing: 0.04em;
 }
 
@@ -395,10 +418,6 @@ html.resume-root body {
     grid-template-columns: 1fr;
   }
 
-  .r-flow {
-    column-count: 1;
-  }
-
   .r-date,
   .r-text,
   .r-skill-grid {
@@ -431,6 +450,9 @@ html.resume-root body {
   }
 
   .r-page {
+    /* A4 width minus the @page side margins. Fixed so the layout is
+       identical whatever the browser window size. */
+    width: 186mm;
     max-width: none;
     min-height: 0;
     margin: 0;

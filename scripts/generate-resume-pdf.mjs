@@ -60,6 +60,9 @@ const countPages = (pdf) =>
 
 const renderPdf = async (privateDetails) => {
   const page = await browser.newPage();
+  // Lay the page out exactly as it will print, so the page-1/page-2 split
+  // measured in the browser matches the PDF.
+  await page.emulateMediaType('print');
   page.on('pageerror', (err) => console.error('[resume page]', err.message));
   if (privateDetails) {
     await page.evaluateOnNewDocument((details) => {

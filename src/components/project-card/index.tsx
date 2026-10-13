@@ -4,8 +4,12 @@ import { Project } from '../../interfaces/sanitized-config';
 import { skeleton } from '../../utils';
 import ReshiftIcon from '../../assets/reshift-icon.png';
 import GreenAndMeIcon from '../../assets/green-and-me-icon.png';
+import CyberiskIQIcon from '../../assets/cyberiskiq-icon.png';
+import NysdIcon from '../../assets/nysd-icon.png';
 
 const images = {
+  nysdIcon: NysdIcon,
+  cyberiskIQIcon: CyberiskIQIcon,
   reshiftIcon: ReshiftIcon,
   greenAndMeIcon: GreenAndMeIcon,
 };

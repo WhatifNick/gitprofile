@@ -113,6 +113,13 @@ const CONFIG = {
       companyLink: 'https://reshift.online',
     },
     {
+      company: 'Transmax',
+      position: 'Software Developer Consultant',
+      from: 'October 2025',
+      to: 'April 2026',
+      companyLink: 'https://www.transmax.com.au/',
+    },
+    {
       company: 'Mojo Soup',
       position: 'Software Developer',
       from: 'November 2023',
@@ -194,6 +201,39 @@ const CONFIG = {
   ],
   featuredProjects: [
     {
+      title: 'NYSD - website redesign',
+      company: 'New York School of Design',
+      description:
+        "Complete overhaul of the NYSD's existing WordPress setup, migrating it to a modern, mobile-first, tech stack, improving user experience, modernizing the visual design, and optimizing for mobile performance and accessibility, while ensuring seamless content management and scalability.",
+      skills: [
+        'Typescript',
+        'Next.js',
+        'HubSpot',
+        'Vercel',
+        'Sanity',
+        'Tailwind CSS',
+        'Google Analytics',
+      ],
+      imageUrl: 'nysdIcon',
+      link: 'https://nysd-website-nine.vercel.app',
+    },
+    {
+      title: 'CyberiskIQ - website redesign',
+      company: 'CyberiskIQ',
+      description:
+        'Redesigned outdated WordPress website for CyberiskIQ, improving user experience and modernizing the visual design. Optimized for mobile performance and accessibility, the website was enhanced with fully customizable blog and quiz components.',
+      skills: [
+        'Javascript',
+        'React',
+        'Vercel',
+        'Decap CMS',
+        'Resend',
+        'Tailwind CSS',
+      ],
+      imageUrl: 'cyberiskIQIcon',
+      link: 'https://cyberiskiq.com',
+    },
+    {
       title: 'Reshift - Shift Manager Progress App',
       company: 'Guzman y Gomez Sunshine Coast',
       description:
@@ -202,7 +242,7 @@ const CONFIG = {
         'Typescript',
         'React',
         'Supabase',
-        'react-router-dom',
+        // 'react-router-dom',
         'Material UI',
         'MUI X',
       ],
@@ -218,7 +258,7 @@ const CONFIG = {
         'Javascript',
         'React',
         'Firebase',
-        'react-router-dom',
+        // 'react-router-dom',
         'Redux',
         'Material UI',
       ],
@@ -261,16 +301,6 @@ const CONFIG = {
       { title: 'MUI X' },
       { title: 'Recharts' },
     ],
-    packages: [
-      { title: 'tanstack/react-query' },
-      { title: 'react-router-dom' },
-      { title: 'react-hook-form' },
-      { title: 'redux' },
-      { title: 'ag-grid' },
-      { title: 'yup' },
-      { title: 'react-big-calendar' },
-      { title: 'lodash' },
-    ],
     databases: [
       { title: 'Azure' },
       { title: 'Supabase' },
@@ -280,6 +310,8 @@ const CONFIG = {
       { title: 'SQLite' },
     ],
     platforms: [
+      { title: 'Vercel' },
+      { title: 'Sanity' },
       { title: 'Atlassian/Jira' },
       { title: 'GitHub' },
       { title: 'GitLab' },
@@ -287,9 +319,43 @@ const CONFIG = {
       { title: 'Power BI/Sharepoint' },
       { title: 'Hubspot' },
       { title: 'Squarespace' },
+      { title: 'Decap CMS' },
+      { title: 'Resend', hideOnPDF: true },
     ],
+    // Packages show on the website only (hideOnPDF on every item hides the
+    // whole group from the resume PDF).
+    packages: [
+      { title: 'tanstack/react-query' },
+      { title: 'react-router-dom' },
+      { title: 'redux' },
+      { title: 'ag-grid' },
+      { title: 'react-hook-form', hideOnPDF: true },
+      { title: 'yup', hideOnPDF: true },
+      { title: 'react-big-calendar', hideOnPDF: true },
+      { title: 'lodash', hideOnPDF: true },
+    ],
+    agents: [{ title: 'Claude' }, { title: 'ChatGPT' }, { title: 'Copilot' }],
   },
   professionalProjects: [
+    {
+      title: 'Disruptions Tab Rework',
+      company: 'Transmax',
+      description:
+        'Starting with an atomic design approach, I lead the team in reworking the disruptions tab for better user experience and code maintainability. This involved breaking down the UI into reusable components and ensuring consistent styling across the application, resulting in tens of thousands of lines of code to be removed from the codebase, which significantly improved build and initial page load time, while removing multiple redundancies and sources of truth, removing current and potential future bugs.',
+      skills: ['Typescript', 'React', 'tanstack/react-query', 'Material UI'],
+    },
+    {
+      title: 'Component Library - Date Range Picker',
+      company: 'Transmax',
+      description:
+        'Contributed new date range picker to Storybook component library and integrated it into existing filter toolbar and data grid. Created upgrade guide for company wide usage.',
+      skills: [
+        'Typescript',
+        'Storybook',
+        'React',
+        'Material UI (MUI X + Core)',
+      ],
+    },
     {
       title: 'Medical Timesheet App',
       company: 'Mojo Soup',
@@ -308,7 +374,7 @@ const CONFIG = {
       title: 'Disaster Reporting Portal',
       company: 'Mojo Soup',
       description:
-        "Custom Google Maps component that uses the metadata from user's uploaded photos to position them on the map. The component can upload hundreds of photos at once with the ability to drag and drop them into a drop zone. Users can view photos side by side in draggable modals to compare pre and post road repairs, measure distances between locations, and even display them in street view.",
+        "Custom Google Maps component that uses the metadata from user's uploaded photos to position them on the map. The component can upload hundreds of photos at once with drag and drop functionality. Users can view photos side by side in draggable modals to compare pre and post road repairs, measure distances between locations, and even display them in street view.",
       skills: [
         'Typescript',
         'React',
@@ -347,6 +413,7 @@ const CONFIG = {
         'TanStack Query',
         'SharePoint',
       ],
+      hideOnPDF: true,
     },
     {
       title: 'ChatGPT Messaging Interface',
@@ -375,6 +442,7 @@ const CONFIG = {
       description:
         "Migrating from Angular, my team rebuilt and redesigned the user's profile, settings page, and sign up wizard. Implemented 2 factor authentication in settings. Implemented CV parsing in sign up wizard.",
       skills: ['Javascript', 'React', 'Material UI'],
+      hideOnPDF: true,
     },
     {
       title: 'Component Library',
@@ -382,6 +450,7 @@ const CONFIG = {
       description:
         "Individually created central place for developers to view component's source code and properties to learn how to implement new or existing components into the app. This significantly sped up front end development time especially for new hires.",
       skills: ['Storybook', 'React', 'Material UI'],
+      hideOnPDF: true,
     },
     {
       title: 'In App Messaging using Twilio',
@@ -389,6 +458,7 @@ const CONFIG = {
       description:
         'Created new section in app for instant messaging between users. This greatly increased user’s time in app. This was built using the Twilio API',
       skills: ['Javascript', 'React', 'Twilio'],
+      hideOnPDF: true,
     },
   ],
   // Display articles from your medium or dev account. (Optional)
